@@ -1,0 +1,43 @@
+Teams
+Solo or teams of up to 5. Only registered teammates in indieconnect will get Tickets upon winning.
+Registration closes before the event starts. Members cannot swap teams or join more than one team.
+At least the POC member must be in the event Discord server with the Discord username they registered.
+On Discord, pick your team role (⁠join-teams ). If it does not exist yet, create a private thread named after your team under ⁠join-teams .
+Need help? Ping the Admin TGC role.
+UG1 Track is only for teams where every member is an IIITH UG or PG 2026 batch student. Anyone from anywhere in the world can participate in the General Track
+
+Proposal and concept lock
+Mentors help you shape your idea from Hour 0 until Hour 12.
+Hour 12 (hard): submit your final scope, public GitHub repository and final idea through the official form. No major premise pivots after this. Evaluation compares your game against this plan.
+
+Fresh codebase
+All game code, mechanics and core architecture must be built within the 100 hours.
+Allowed: generic engine starter templates and small open source features, for example a standard Godot character controller or the Unity default scene.
+Banned, with immediate disqualification: complete game starter kits, full game templates, prebuilt system logic, pre existing games and copy pasted projects.
+Keep a public GitHub repository with a proper license. Commit history is audited.
+ 
+@everyone, Assets
+Paid third party assets are forbidden (Unity Asset Store, Unreal Marketplace, paid itch.io assets, Fab, private marketplaces).
+Only free, open source, AI generated or Creative Commons (CC0, CC BY) audio, textures, 3D models and fonts are allowed.
+List every third party asset in CREDITS.md in the repository root and on the itch.io page, with source links and licenses.
+
+AI tools
+AI tools are allowed and must be fully disclosed: LLMs for code or text, and image, sound or 3D generators.
+Core design and direction must show your own effort.
+
+Final submission (Hour 100)
+Strict code freeze. Code is pulled at the deadline. Backdating on GitHub or itch.io means disqualification.
+A public browser playable (HTML5 or WebGL) build on itch.io.
+The root README.md must show the itch.io link, setup and run instructions, controls and team details.
+Deliver a complete, stable gameplay loop of 10 to 15 minutes. Playtime beyond 20 minutes (average first playthrough) is not evaluated.
+
+Disqualification from the prize pool
+Missing public source code or an on time itch.io playable build, using paid assets, writing game code before Hour 0 or authorship that cannot be backed up.
+
+Communication
+Official announcements, team check ins and mentor communication run only through the event Discord server.
+
+Decisions
+Judging panel and organising committee decisions on rule interpretation, disqualifications and scores are final. Results are published within one week of the event.
+
+(these are just guidelines which you must follow).

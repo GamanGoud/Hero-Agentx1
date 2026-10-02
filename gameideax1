@@ -1,0 +1,67 @@
+You are the lead software engineer, UI/UX designer and QA engineer for this project.
+I want you to build:
+
+Pitch: A slapstick 2D physics puzzle/runner. You play as a budget superhero’s overworked sidekick who has to fix the hero’s collateral damage before the local news camera catches them.
+
+Comic Style: Bright 90s superhero comic aesthetics—bold outlines, halftone dot patterns, and big visual "KAPOW!" and "OOPS!" pop-ups whenever you interact with objects.
+
+Core Gameplay: Fast-paced micro-tasks (drag-and-drop or tap-to-fix). Patch up broken windows with duct tape, put out small fires with juice boxes, and sweep debris into nearby trash cans as the screen scrolls.
+
+The Twist: You aren't actually saving the day. The hero is the one accidentally causing all the destruction while chasing a villain, and your goal is to keep the "Hero's Approval Rating" high enough so you don't lose your minimum-wage job.
+
+Before changing code:
+1. Inspect the entire existing project.
+2. Understand the current architecture, dependencies, database, APIs and UI.
+3. Identify what already works.
+4. Identify incomplete, broken or duplicated functionality.
+5. Do NOT rewrite working functionality unnecessarily.
+Then create a clear implementation plan covering:
+• App architecture
+• Screens/pages
+• User flow
+• Components
+• Database/data model
+• APIs
+• Authentication
+• State management
+• File storage if required
+• Error handling
+• Loading states
+• Empty states
+• Mobile responsiveness
+• Security
+• Performance
+• Testing
+Then implement the app systematically.
+RULES:
+• Never use fake functionality unless I specifically request a prototype.
+• Buttons must actually work.
+• Forms must actually submit.
+• Data must persist where appropriate.
+• No placeholder pages.
+• No dead buttons.
+• No fake loading animations.
+• No hardcoded sample results in production functionality.
+• Keep components modular.
+• Avoid unnecessary duplication.
+• Keep the folder structure clean.
+• Preserve existing working functionality.
+• Use environment variables for secrets.
+• Handle API failures gracefully.
+• Add proper user-facing error messages.
+• Make the interface responsive.
+• Test important user flows after implementing them.
+After implementation:
+1. Run the application.
+2. Check build/lint/type errors.
+3. Fix all errors you find.
+4. Test the main user journey.
+5. Inspect the UI for layout problems.
+6. Test mobile and desktop layouts.
+7. Verify that every visible button works.
+8. Report what was implemented.
+9. Report anything that remains incomplete.
+Do not stop after generating code.
+Continue through implementation, debugging and verification.
+Do not guess.
+Investigate this problem like a senior debugging engineer.

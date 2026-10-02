@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Sidekick Sweep: Damage Control! - 90s Comic Slapstick Runner</title>
+  <meta name="description" content="A slapstick 2D comic physics runner! Play as an overworked sidekick repairing Captain Calamity's collateral chaos before the news chopper catches him!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <div id="app" class="comic-app-root">
+    
+    <!-- AUDIO INITIALIZATION BANNER (IF BLOCKED) -->
+    <div id="audio-prompt-banner" class="audio-banner hidden">
+      <span>🔊 CLICK ANYWHERE TO UNMUTE 90s RETRO COMIC AUDIO</span>
+    </div>
+
+    <!-- TITLE SCREEN / COMIC COVER -->
+    <section id="screen-title" class="screen active">
+      <div class="comic-cover-container">
+        
+        <!-- Comic Top Banner Header -->
+        <div class="comic-cover-banner">
+          <div class="banner-edition">AUTHENTIC SLAPSTICK COMICS GROUP • APPROVED BY COMICS CODE</div>
+          <div class="banner-issue-price">ONLY 25¢ • ISSUE #1 - #5</div>
+        </div>
+
+        <!-- Main Title Logo -->
+        <div class="comic-logo-wrapper">
+          <div class="logo-subhead">MINIMUM WAGE. MAXIMUM CHAOS.</div>
+          <h1 class="comic-main-title">
+            <span class="word-sidekick">SIDEKICK</span>
+            <span class="word-sweep">SWEEP</span>
+          </h1>
+          <div class="logo-badge-container">
+            <span class="logo-subtitle-banner">DAMAGE CONTROL INC.!</span>
+          </div>
+        </div>
+
+        <!-- Comic Issue Selector Carousel -->
+        <div class="issue-selector-box">
+          <div class="selector-header">SELECT COMIC BOOK ISSUE:</div>
+          <div class="issue-carousel" id="issue-carousel-container">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- Title Actions -->
+        <div class="title-action-buttons">
+          <button class="comic-btn primary-btn pulse-glow" id="btn-play-selected">
+            START SHIFT NOW! 🚀
+          </button>
+          <div class="title-sub-buttons">
+            <button class="comic-btn secondary-btn" id="btn-open-shop">
+              🛠️ SUPPLY SHOP
+            </button>
+            <button class="comic-btn secondary-btn" id="btn-open-manual">
+              📖 HOW TO PLAY
+            </button>
+            <button class="comic-btn secondary-btn" id="btn-open-highscores">
+              🏆 HALL OF FAME
+            </button>
+          </div>
+        </div>
+
+        <!-- Audio & Sound Controls -->
+        <div class="title-footer-row">
+          <div class="audio-controls-row">
+            <button class="audio-toggle-btn" id="btn-toggle-sound" title="Toggle SFX">
+              🔊 SFX: <span id="label-sound-state">ON</span>
+            </button>
+            <button class="audio-toggle-btn" id="btn-toggle-music" title="Toggle Music">
+              🎵 BGM: <span id="label-music-state">ON</span>
+            </button>
+          </div>
+          <div class="title-credits-tag">TGC HACKATHON 2026 EDITION • 100% CC0/PROCEDURAL</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GAMEPLAY ARENA SCREEN -->
+    <section id="screen-game" class="screen hidden">
+      
+      <!-- IN-GAME HUD OVERLAY -->
+      <header class="game-hud">
+        
+        <!-- Top Status Bar -->
+        <div class="hud-top-bar">
+          
+          <!-- Issue Info -->
+          <div class="hud-item hud-issue-info">
+            <span class="hud-label">MISSION:</span>
+            <span class="hud-value" id="hud-issue-title">Issue #1</span>
+          </div>
+
+          <!-- Public Approval Rating Meter -->
+          <div class="hud-item hud-approval-meter-box">
+            <div class="approval-header">
+              <span class="approval-title">HERO'S APPROVAL RATING</span>
+              <span class="approval-percent" id="hud-approval-percent">100%</span>
+            </div>
+            <div class="approval-track">
+              <div class="approval-fill" id="hud-approval-fill" style="width: 100%;"></div>
+              <div class="approval-danger-mark">40% MIN</div>
+            </div>
+          </div>
+
+          <!-- Shift Earnings & Score -->
+          <div class="hud-item hud-earnings-box">
+            <div class="hud-mini-stat">
+              <span class="hud-mini-label">PAYCHECK:</span>
+              <span class="hud-mini-value" id="hud-earnings-val">$0.00</span>
+            </div>
+            <div class="hud-mini-stat">
+              <span class="hud-mini-label">SCORE:</span>
+              <span class="hud-mini-value" id="hud-score-val">0</span>
+            </div>
+          </div>
+
+          <!-- Shift Timer -->
+          <div class="hud-item hud-timer-box">
+            <span class="hud-mini-label">TIME LEFT:</span>
+            <span class="hud-timer-value" id="hud-time-val">60s</span>
+          </div>
+
+          <!-- Pause / Return Button -->
+          <div class="hud-controls">
+            <button class="hud-btn-mini" id="btn-pause-game" title="Pause Game">⏸️</button>
+          </div>
+
+        </div>
+
+        <!-- News Flash Chyron Bar -->
+        <div class="news-ticker-container">
+          <div class="ticker-badge">ACTION 9 LIVE</div>
+          <div class="ticker-content" id="hud-ticker-text">
+            CAPTAIN CALAMITY SPOTTED PATROLLING DOWNTOWN! HIGH RISK OF RECKLESS JUSTICE!
+          </div>
+        </div>
+
+      </header>
+
+      <!-- GAME CANVAS VIEWPORT -->
+      <div class="canvas-viewport" id="canvas-wrapper">
+        <canvas id="game-canvas" width="1000" height="600"></canvas>
+      </div>
+
+      <!-- FLOATING UTILITY BELT (TOOL SELECTOR) -->
+      <footer class="utility-belt-container">
+        <div class="belt-dock" id="utility-belt">
+          <button class="tool-btn active" data-tool="tape" id="tool-tape" title="Duct Tape [1] - Fix Windows">
+            <span class="tool-icon">🩹</span>
+            <span class="tool-name">DUCT TAPE</span>
+            <span class="tool-hotkey">1</span>
+          </button>
+          <button class="tool-btn" data-tool="juice" id="tool-juice" title="Juice Box [2] - Extinguish Fires">
+            <span class="tool-icon">🧃</span>
+            <span class="tool-name">JUICE CANNON</span>
+            <span class="tool-hotkey">2</span>
+          </button>
+          <button class="tool-btn" data-tool="broom" id="tool-broom" title="Power Broom [3] - Sweep Debris">
+            <span class="tool-icon">🧹</span>
+            <span class="tool-name">POWER BROOM</span>
+            <span class="tool-hotkey">3</span>
+          </button>
+          <button class="tool-btn" data-tool="wrench" id="tool-wrench" title="Monkey Wrench [4] - Fix Sparks & Signs">
+            <span class="tool-icon">🔧</span>
+            <span class="tool-name">WRENCH</span>
+            <span class="tool-hotkey">4</span>
+          </button>
+          <button class="tool-btn" data-tool="megaphone" id="tool-megaphone" title="PR Megaphone [5] - Blind Chopper">
+            <span class="tool-icon">📢</span>
+            <span class="tool-name">PR MEGAPHONE</span>
+            <span class="tool-hotkey">5</span>
+          </button>
+        </div>
+      </footer>
+
+    </section>
+
+    <!-- HOW TO PLAY MANUAL MODAL -->
+    <div id="modal-manual" class="comic-modal-overlay hidden">
+      <div class="comic-modal-window manual-window">
+        <div class="modal-header">
+          <h2 class="modal-title">SIDEKICK FIELD SURVIVAL MANUAL</h2>
+        </div>
+        <p class="modal-subtitle">Welcome to the collateral damage division, Barnaby! Here's how to keep your job:</p>
+
+        <div class="manual-cards-grid">
+          <div class="manual-card">
+            <div class="manual-card-icon">🩹</div>
+            <div class="manual-card-title">SHATTERED GLASS & WINDOWS</div>
+            <div class="manual-card-desc">Captain Calamity loves punching enemies through storefronts. Slap heavy <strong>Duct Tape</strong> across the cracks to seal them before pedestrians notice!</div>
+          </div>
+          <div class="manual-card">
+            <div class="manual-card-icon">🧃</div>
+            <div class="manual-card-title">FIRES & HYDRANT BLAZES</div>
+            <div class="manual-card-desc">Missed laser blasts set trash cans and barbecue grills ablaze! Spray pressurized <strong>Juice Boxes</strong> to extinguish the flames completely!</div>
+          </div>
+          <div class="manual-card">
+            <div class="manual-card-icon">🧹</div>
+            <div class="manual-card-title">BRICKS & STREET DEBRIS</div>
+            <div class="manual-card-desc">Falling cornices and masonry scatter physical rubble on the sidewalk! Use your <strong>Power Broom</strong> to sweep them directly into green <strong>Trash Cans</strong>!</div>
+          </div>
+          <div class="manual-card">
+            <div class="manual-card-icon">🔧</div>
+            <div class="manual-card-title">ELECTRICAL SPARKS & SIGNS</div>
+            <div class="manual-card-desc">Severed streetlights and tilted billboards will crush civilians! Tighten the bolts with your trusty <strong>Monkey Wrench</strong>!</div>
+          </div>
+          <div class="manual-card highlight-card">
+            <div class="manual-card-icon">🚁</div>
+            <div class="manual-card-title">ACTION 9 NEWS CHOPPER!</div>
+            <div class="manual-card-desc">Chad Chiseled's helicopter shines a live camera spotlight. If he films unfixed hazards, your <strong>Approval plummets</strong>! But if you fix hazards on camera, you get <strong>Heroic Bonuses & Cash Tips</strong>!</div>
+          </div>
+          <div class="manual-card">
+            <div class="manual-card-icon">⌨️</div>
+            <div class="manual-card-title">CONTROLS</div>
+            <div class="manual-card-desc">
+              <strong>Move:</strong> A / D or Arrow Keys (or Click/Drag on screen)<br/>
+              <strong>Jump:</strong> Space or W or Up Arrow<br/>
+              <strong>Tools:</strong> Keys 1 - 5 or Click utility belt buttons<br/>
+              <strong>Fix:</strong> Click/Tap on the damaged object!
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="comic-btn primary-btn" id="btn-close-manual">I'M READY TO SWEEP! (CLOSE)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAUSE MODAL -->
+    <div id="modal-pause" class="comic-modal-overlay hidden">
+      <div class="comic-modal-window pause-window">
+        <h2 class="modal-title">SHIFT ON BREAK (PAUSED)</h2>
+        <p class="modal-subtitle">Take a breather, Higgins! The city is still in flames waiting for you.</p>
+        <div class="pause-actions-list">
+          <button class="comic-btn primary-btn pulse-glow" id="btn-resume-game">RESUME SHIFT ▶️</button>
+          <button class="comic-btn secondary-btn" id="btn-pause-shop">VISIT SUPPLY SHOP 🛠️</button>
+          <button class="comic-btn secondary-btn" id="btn-restart-shift">RESTART THIS ISSUE 🔄</button>
+          <button class="comic-btn danger-btn" id="btn-quit-to-title">QUIT TO MAIN MENU</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL PLACEHOLDERS FOR DYNAMIC PANELS -->
+    <div id="modal-shop" class="hidden"></div>
+    <div id="modal-cutscenes" class="hidden"></div>
+    <div id="modal-highscores" class="hidden"></div>
+    <div id="modal-newspaper" class="hidden"></div>
+
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
