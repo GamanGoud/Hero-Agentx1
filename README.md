@@ -100,3 +100,4 @@ The output will be bundled in the `dist/` directory, ready to be zipped and uplo
 ## 👥 Team & Attribution
 - **Developer / Designer / Sound Synthesis**: TGC Hackathon 2026 Team
 - **Assets & Licenses**: Full breakdown available in [CREDITS.md](CREDITS.md) (All fonts SIL OFL, all audio procedural Web Audio CC0).
+# Hero-Action
